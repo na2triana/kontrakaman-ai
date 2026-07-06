@@ -1,0 +1,79 @@
+/* ==========================================================================
+   TAMBAHAN DESAIN KOMPONEN MAHAL (Tabel, Gambar, Kartu)
+   ========================================================================== */
+.hero-inner {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    text-align: left;
+}
+.hero-media {
+    flex: 1;
+}
+.hero-media img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    box-shadow: 0 20px 40px -15px rgba(0,0,0,0.5);
+}
+.section-alt {
+    background-color: rgba(30, 41, 59, 0.3);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+.cards {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+.card {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    flex: 1;
+    min-width: 220px;
+}
+.card h3 {
+    margin: 0 0 10px;
+    color: #38BDF8;
+}
+.card p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--muted);
+}
+.table-wrap {
+    overflow-x: auto;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background-color: var(--surface);
+}
+.schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 500px;
+    font-size: 14px;
+}
+.schedule-table th, .schedule-table td {
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+}
+.schedule-table th {
+    background-color: rgba(0,0,0,0.2);
+    color: var(--text);
+}
+.schedule-table td {
+    color: var(--muted);
+}
+html {
+    scroll-behavior: smooth; /* Efek gulir mulus saat tombol menu diklik */
+}
+@media (max-width: 640px) {
+    .hero-inner { flex-direction: column; text-align: center; }
+    .hero-media img { max-width: 260px; }
+}
