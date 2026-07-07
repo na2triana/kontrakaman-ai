@@ -34,7 +34,7 @@
 <div class="container hero-inner">
 <div class="hero-copy">
 <p class="eyebrow">Proteksi digital untuk freelancer & UMKM</p>
-<h1>Kenali Penipuan Kerja dan Kontrak Sebelum Anda Rugi</h1>
+<h1 id="hero-title">Kenali Penipuan Kerja dan Kontrak Sebelum Anda Rugi</h1>
 <p class="lead">
 KontrakAman Hyperlocal membantu pekerja lepas, pekerja informal, dan pelaku UMKM mendeteksi
 lowongan kerja fiktif, penawaran kontrak mencurigakan, dan modus penipuan digital lainnya —
@@ -55,6 +55,8 @@ dicocokkan dengan pola resmi dari OJK, Kemkomdigi, dan Kemnaker.
 <textarea id="scanInput" name="scanInput" rows="5" placeholder="Contoh: 'Kerja part-time, cukup deposit 150rb dulu, langsung cuan hari ini...'"></textarea>
 <p class="field-hint" id="scanHint"></p>
 <button type="submit" class="btn btn-primary btn-block">Analisis Sekarang</button>
+<button type="submit" class="btn btn-primary btn-block">Analisis Sekarang</button>
+<button type="button" id="btnReset" class="btn btn-block" style="background: transparent; border: 1px solid var(--border); margin-top: 8px;">Reset Kotak</button>
 </form>
 
 <div class="scan-result" id="scanResult" hidden>
@@ -64,6 +66,10 @@ dicocokkan dengan pola resmi dari OJK, Kemkomdigi, dan Kemnaker.
 <div class="result-steps">
 <p class="result-steps-label">Langkah yang disarankan:</p>
 <p id="resultMitigasi"></p>
+  <div class="feedback-box" style="margin-top: 15px; padding-top: 10px; border-top: 1px solid var(--border); text-align: center;">
+    <p style="font-size: 13px; color: var(--muted);">Apakah hasil analisis ini membantu Anda?</p>
+    <button type="button" id="btnLike" class="btn" style="padding: 5px 10px; font-size: 12px; background: rgba(76, 175, 125, 0.1); color: var(--safe);">👍 Membantu</button>
+    <button type="button" id="btnDislike" class="btn" style="padding: 5px 10px; font-size: 12px; background: rgba(224, 84, 79, 0.1); color: var(--danger);">👎 Kurang Tepat</button>
 </div>
 <p class="result-source" id="resultSource"></p>
 </div>
