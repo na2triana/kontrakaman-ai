@@ -1,106 +1,188 @@
-/* ==========================================================================
-   FITUR JAVASCRIPT: LOGIKA INTERAKTIF KONTRAKAMAN HYPERLOCAL
-   ========================================================================== */
+(function () {
+  "use strict";
 
-document.addEventListener("DOMContentLoaded", function() {
-    
-    const btnAnalisis = document.getElementById("btn-analisis");
-    const btnReset = document.getElementById("btn-reset"); // Inisialisasi tombol reset
-    const txtMessage = document.getElementById("message");
-    const boxHasil = document.getElementById("hasil-analisis");
-    const kontenHasil = document.getElementById("konten-hasil");
-    
-    const btnYa = document.getElementById("fb-ya");
-    const btnTidak = document.getElementById("fb-tidak");
-
-    // LOGIKA PROSES ANALISIS
-    if (btnAnalisis && txtMessage) {
-        btnAnalisis.addEventListener("click", function() {
-            const teksInput = txtMessage.value.trim().toLowerCase();
-            
-            if (teksInput === "") {
-                alert("Mohon tempelkan teks percakapan terlebih dahulu.");
-                return;
-            }
-            
-            btnAnalisis.innerText = "Sedang Memindai...";
-            btnAnalisis.disabled = true;
-
-            setTimeout(function() {
-                let laporanAnalisis = "";
-
-                if (teksInput.includes("deposit") || teksInput.includes("part-time") || teksInput.includes("bayar")) {
-                    laporanAnalisis = `
-                        <div style="background: rgba(239, 68, 68, 0.1); border-left: 4px solid #EF4444; padding: 12px; border-radius: 8px;">
-                            <strong style="color: #EF4444;">🔴 RISIKO TINGGI: Indikasi Kerja Deposit / Scam</strong>
-                            <p style="margin: 8px 0 0; font-size: 14px; color: #94A3B8;">
-                                Pesan mengandung indikasi permintaan uang muka di depan. Jangan pernah mentransfer dana jaminan!
-                            </p>
-                        </div>
-                    `;
-                } else if (teksInput.includes("ijazah") || teksInput.includes("tahan")) {
-                    laporanAnalisis = `
-                        <div style="background: rgba(239, 68, 68, 0.1); border-left: 4px solid #EF4444; padding: 12px; border-radius: 8px;">
-                            <strong style="color: #EF4444;">🔴 RISIKO TINGGI: Aturan Hukum Penahanan Dokumen</strong>
-                            <p style="margin: 8px 0 0; font-size: 14px; color: #94A3B8;">
-                                Terdeteksi indikasi penahanan dokumen pribadi asli pekerja oleh sepihak perusahaan.
-                            </p>
-                        </div>
-                    `;
-                } else {
-                    laporanAnalisis = `
-                        <div style="background: rgba(16, 185, 129, 0.1); border-left: 4px solid #10B981; padding: 12px; border-radius: 8px;">
-                            <strong style="color: #10B981;">🟢 RISIKO RENDAH (DATABASE LOKAL): Pola Kata Kunci Aman</strong>
-                            <p style="margin: 8px 0 0; font-size: 14px; color: #94A3B8;">
-                                Teks ini lolos dari kata kunci mencurigakan lokal. Catatan: Kasus kompleks seperti paket investasi luar negeri (Bulgaria/Schengen) memerlukan aktivasi server API Gemini untuk pemindaian makna konteks penuh.
-                            </p>
-                        </div>
-                    `;
-                }
-
-                kontenHasil.innerHTML = laporanAnalisis;
-                boxHasil.style.display = "block";
-                
-                btnAnalisis.innerText = "Analisis Risiko AI";
-                btnAnalisis.disabled = false;
-                boxHasil.scrollIntoView({ behavior: 'smooth' });
-
-            }, 800);
-        });
+  /* Basis data pola modus penipuan (diringkas dari data kurasi tim,
+     sumber resmi: OJK Satgas PASTI, Kemkomdigi, Kemnaker) */
+  var MODUS_DB = [
+    {
+      nama: "Penawaran kerja paruh waktu berdeposit",
+      kataKunci: ["deposit dulu", "modal kecil", "return besar", "tanpa interview", "cuan"],
+      mitigasi: "Jangan pernah transfer deposit untuk 'kerja'. Verifikasi legalitas perusahaan dan simpan bukti chat, nomor, serta rekening sebelum melapor.",
+      sumber: "Satgas PASTI / OJK, 2025"
+    },
+    {
+      nama: "Lowongan kerja fiktif via WhatsApp/Telegram",
+      kataKunci: ["hanya via wa", "hanya via telegram", "langsung kerja tanpa tes", "kuota terbatas hari ini"],
+      mitigasi: "Cocokkan identitas perekrut dengan domain resmi perusahaan dan hindari berpindah ke grup privat yang tidak terverifikasi.",
+      sumber: "Kemkomdigi, 2025"
+    },
+    {
+      nama: "Program bantuan atau pendaftaran kerja palsu",
+      kataKunci: ["pendaftaran dibuka lewat link", "program tkm", "segera daftar sebelum kuota habis"],
+      mitigasi: "Verifikasi tanggal pembukaan program hanya di situs resmi, jangan isi formulir dari tautan tidak resmi.",
+      sumber: "Kemnaker, 2025"
+    },
+    {
+      nama: "Impersonation entitas berizin / tiruan brand resmi",
+      kataKunci: ["mitra resmi", "akun verifikasi", "admin pusat"],
+      mitigasi: "Cocokkan domain, email, dan nomor rekening dengan daftar kontak resmi perusahaan melalui dua jalur verifikasi.",
+      sumber: "Satgas PASTI, 2025"
+    },
+    {
+      nama: "Penawaran kerja online yang menyasar pekerja migran",
+      kataKunci: ["kerja luar negeri legal", "cepat berangkat", "tanpa biaya", "urus semua dokumen"],
+      mitigasi: "Verifikasi perusahaan penyalur, izin resmi, dan kontrak kerja sebelum berkas pribadi diserahkan.",
+      sumber: "Kemkomdigi & KP2MI, 2025"
+    },
+    {
+      nama: "Dokumen kerja atau kontrak palsu",
+      kataKunci: ["kontrak sudah siap tinggal tanda tangan", "dp dulu baru kirim dokumen", "invoice resmi"],
+      mitigasi: "Validasi dokumen dengan menelepon balik ke nomor resmi perusahaan dan gunakan rekening bersama untuk transaksi.",
+      sumber: "IASC, 2026"
+    },
+    {
+      nama: "Penipuan kerja paruh waktu lewat akun palsu",
+      kataKunci: ["kerja fleksibel dari rumah", "cukup like", "cukup klik", "gaji harian"],
+      mitigasi: "Periksa alamat kantor dan legalitas perusahaan, serta jangan pernah mengirim OTP atau data identitas.",
+      sumber: "Satgas PASTI / OJK, 2025"
     }
+  ];
 
-    /* ==========================================================================
-       FITUR TAMBAHAN: LOGIKA RESET KOTAK TANPA REFRESH PAGE
-       Penjelasan: Mengembalikan kondisi form ke keadaan kosong secara bersih.
-       ========================================================================== */
-    if (btnReset) {
-        btnReset.addEventListener("click", function() {
-            txtMessage.value = ""; // Mengosongkan area teks input
-            boxHasil.style.display = "none"; // Menyembunyikan kembali kotak hasil analisis
-            kontenHasil.innerHTML = ""; // Membersihkan isi teks analisis lama
-            
-            // Mengaktifkan kembali tombol umpan balik ke mode normal
-            btnYa.disabled = false;
-            btnTidak.disabled = false;
-            btnYa.style.opacity = "1";
-            btnTidak.style.opacity = "1";
-            
-            // Menggulir layar kembali dengan mulus ke area atas kotak input
-            txtMessage.scrollIntoView({ behavior: 'smooth' });
-        });
-    }
+  function escapeHtml(str) {
+    return str
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+  }
 
-    // LOGIKA TOMBOL FEEDBACK USER
-    if (btnYa && btnLater = btnTidak) {
-        btnYa.addEventListener("click", function() {
-            alert("Terima kasih atas feedback Anda! Data disimpan secara anonim.");
-            btnYa.disabled = true; btnTidak.disabled = true;
-            btnYa.style.opacity = "0.5"; btnTidak.style.opacity = "0.5";
-        });
-        btnTidak.addEventListener("click", function() {
-            prompt("Sebutkan bagian analisis yang kurang tepat:");
-            btnYa.disabled = true; btnTidak.disabled = true;
-            btnYa.style.opacity = "0.5"; btnTidak.style.opacity = "0.5";
-        });
+  function findMatch(text) {
+    var lower = text.toLowerCase();
+    for (var i = 0; i < MODUS_DB.length; i++) {
+      var modus = MODUS_DB[i];
+      for (var j = 0; j < modus.kataKunci.length; j++) {
+        if (lower.indexOf(modus.kataKunci[j]) !== -1) {
+          return modus;
+        }
+      }
     }
-});
+    return null;
+  }
+
+  function initScanForm() {
+    var form = document.getElementById("scanForm");
+    var input = document.getElementById("scanInput");
+    var hint = document.getElementById("scanHint");
+    var resultBox = document.getElementById("scanResult");
+    var badge = document.getElementById("resultBadge");
+    var title = document.getElementById("resultTitle");
+    var desc = document.getElementById("resultDesc");
+    var mitigasi = document.getElementById("resultMitigasi");
+    var source = document.getElementById("resultSource");
+
+    if (!form) return;
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var text = input.value.trim();
+
+      if (!text) {
+        hint.textContent = "Tempel dulu teks yang ingin dianalisis ya.";
+        input.focus();
+        return;
+      }
+      hint.textContent = "";
+
+      var match = findMatch(text);
+      badge.classList.remove("aman", "waspada", "bahaya");
+
+      if (match) {
+        badge.classList.add("bahaya");
+        badge.textContent = "Bahaya";
+        title.textContent = escapeHtml(match.nama);
+        desc.textContent = "Teks yang Anda tempel mengandung pola kalimat yang sering dipakai pada modus ini.";
+        mitigasi.textContent = match.mitigasi;
+        source.textContent = "Sumber referensi: " + match.sumber;
+      } else if (text.length < 25) {
+        badge.classList.add("waspada");
+        badge.textContent = "Waspada";
+        title.textContent = "Teks terlalu singkat untuk dianalisis akurat";
+        desc.textContent = "Tempel percakapan atau isi kontrak yang lebih lengkap agar pencocokan pola lebih akurat.";
+        mitigasi.textContent = "Selalu verifikasi identitas pemberi kerja lewat kanal resmi sebelum melanjutkan transaksi apa pun.";
+        source.textContent = "";
+      } else {
+        badge.classList.add("aman");
+        badge.textContent = "Belum Terdeteksi";
+        title.textContent = "Pola mencurigakan spesifik belum ditemukan";
+        desc.textContent = "Bukan berarti sepenuhnya aman. Basis data kami terus diperbarui, tetap terapkan kehati-hatian dasar.";
+        mitigasi.textContent = "Jangan transfer dana di muka, verifikasi legalitas mitra kerja, dan simpan seluruh bukti komunikasi.";
+        source.textContent = "";
+      }
+
+      resultBox.hidden = false;
+      resultBox.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    });
+  }
+
+  function initNavToggle() {
+    var toggle = document.getElementById("navToggle");
+    var links = document.getElementById("navLinks");
+    if (!toggle || !links) return;
+
+    toggle.addEventListener("click", function () {
+      var isOpen = links.classList.toggle("open");
+      toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    });
+
+    links.querySelectorAll("a").forEach(function (a) {
+      a.addEventListener("click", function () {
+        links.classList.remove("open");
+        toggle.setAttribute("aria-expanded", "false");
+      });
+    });
+  }
+
+  function animateCounter(el) {
+    var target = parseInt(el.getAttribute("data-target"), 10) || 0;
+    var duration = 1200;
+    var start = null;
+
+    function step(timestamp) {
+      if (!start) start = timestamp;
+      var progress = Math.min((timestamp - start) / duration, 1);
+      var value = Math.floor(progress * target);
+      el.textContent = value + (progress >= 1 ? "+" : "");
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        el.textContent = target + "+";
+      }
+    }
+    requestAnimationFrame(step);
+  }
+
+  function initStatsCounter() {
+    var statsBar = document.getElementById("statsBar");
+    if (!statsBar || !("IntersectionObserver" in window)) return;
+
+    var numbers = statsBar.querySelectorAll(".stat-number");
+    var hasRun = false;
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting && !hasRun) {
+          hasRun = true;
+          numbers.forEach(animateCounter);
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.4 });
+
+    observer.observe(statsBar);
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    initScanForm();
+    initNavToggle();
+    initStatsCounter();
+  });
+})();
