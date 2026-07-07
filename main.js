@@ -1,3 +1,29 @@
+// 🔄 Fitur Tombol Reset Kotak Analisis
+    const btnReset = document.getElementById("btnReset");
+    const formScan = document.getElementById("scanForm");
+    const resultBox = document.getElementById("scanResult");
+
+    if (btnReset) {
+        btnReset.addEventListener("click", function() {
+            formScan.reset(); // Mengosongkan kolom input teks
+            resultBox.hidden = true; // Menyembunyikan kembali kotak hasil analisis
+            document.getElementById("scanHint").textContent = ""; // Menghapus pesan peringatan kosong
+        });
+    }
+
+    // 👍 Fitur Penilaian Hasil Analisis (Feedback)
+    const btnLike = document.getElementById("btnLike");
+    const btnDislike = document.getElementById("btnDislike");
+
+    if (btnLike && btnDislike) {
+        btnLike.addEventListener("click", function() {
+            alert("Terima kasih! Umpan balik positif Anda disimpan secara anonim untuk melatih AI.");
+        });
+        btnDislike.addEventListener("click", function() {
+            alert("Terima kasih atas masukannya. Catatan evaluasi ini akan kami gunakan untuk melatih akurasi AI.");
+        });
+    }
+
 (function () {
   "use strict";
 
@@ -181,6 +207,21 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
+    // ✍️ Fitur Teks Bergerak (Typewriter Effect)
+    const teksHero = "Kenali Penipuan Kerja Sebelum Anda Rugi";
+    let indeksKarakter = 0;
+
+    function ketikJudul() {
+        const elemenJudul = document.getElementById("hero-title");
+        if (elemenJudul && indeksKarakter < teksHero.length) {
+            elemenJudul.textContent += teksHero.charAt(indeksKarakter);
+            indeksKarakter++;
+            setTimeout(ketikJudul, 50); // Mengatur kecepatan ketikan (dalam milidetik)
+        }
+    }
+    
+    // Jalankan fungsi ketik saat halaman selesai dimuat
+    ketikJudul();
     initScanForm();
     initNavToggle();
     initStatsCounter();
