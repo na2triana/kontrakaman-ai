@@ -1,145 +1,161 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>KontrakAman Hyperlocal - Pindai Lowongan Kerja Palsu</title>
-    <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KontrakAman Hyperlocal — Deteksi Penipuan Kerja, Kontrak & Lowongan Fiktif</title>
+<meta name="description" content="Cek gratis dan anonim dugaan penipuan kerja, kontrak freelance, atau lowongan fiktif. Alat bantu edukasi untuk freelancer, pekerja informal, dan UMKM mengenali modus penipuan digital sejak dini." />
+<link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-    <!-- HEADER (Memenuhi Kriteria Penilaian Mentor) -->
-    <header class="site-header">
-        <div class="container header-inner">
-            <a class="brand" href="#top">
-                <span class="brand-mark">🛡️</span>
-                <span class="brand-text">KontrakAman.ai</span>
-            </a>
-            <nav class="nav">
-                <ul class="nav-links">
-                    <li><a href="#features">Fitur Utama</a></li>
-                    <li><a href="#workflow">Cara Kerja</a></li>
-                    <li><a href="#scanner">Pindai Obrolan</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="#top">
+<span class="brand-mark">KA</span>
+<span class="brand-text">KontrakAman <em>Hyperlocal</em></span>
+</a>
+<button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false">
+<span></span><span></span><span></span>
+</button>
+<nav class="nav">
+<ul class="nav-links" id="navLinks">
+<li><a href="#cek">Cek Penipuan</a></li>
+<li><a href="#fitur">Fitur</a></li>
+<li><a href="#cara-kerja">Cara Kerja</a></li>
+</ul>
+</nav>
+</div>
+</header>
 
-    <main id="top">
-        <!-- HERO SECTION dengan GAMBAR REPRESENTATIF (Bobot 10 Poin Kriteria) -->
-        <section class="hero">
-            <div class="container hero-inner">
-                <div class="hero-copy">
-                    <h1>Proteksi Kerja Bebas Scam</h1>
-                    <p class="lead">
-                        Lindungi ijazah, dokumen penting, dan hak ekonomimu dari bahaya lowongan kerja palsu tingkat komunitas menggunakan asisten cerdas AI.
-                    </p>
-                    <div class="hero-cta">
-                        <a class="btn btn-primary" href="#scanner">Mulai Pindai Sekarang</a>
-                    </div>
-                </div>
-                <div class="hero-media">
-                    <!-- Menggunakan gambar teknologi siber premium yang representatif -->
-                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80" alt="Siber Proteksi Kerja Lokal" />
-                </div>
-            </div>
-        </section>
+<main id="top">
 
-        <!-- KARTU FITUR & EDUKASI ISU SOSIAL (Bobot Pemahaman Masalah - 35 Poin) -->
-        <section id="features" class="section section-alt">
-            <div class="container">
-                <h2 class="section-title">Fitur Unggulan</h2>
-                <p class="section-subtitle">Bagaimana sistem berbasis AI membantu melindungi hak-hak komunitas Anda:</p>
-                <div class="cards">
-                    <article class="card">
-                        <h3>🔍 Scan Chat WA</h3>
-                        <p>Mendeteksi pola kalimat manipulatif dari sindikat penipuan kerja paruh waktu lokal.</p>
-                    </article>
-                    <article class="card">
-                        <h3>⚖️ Validasi Aturan</h3>
-                        <p>Memastikan klausul kontrak kerja tidak melanggar aturan ijazah Kemnaker.</p>
-                    </article>
-                    <article class="card">
-                        <h3>💡 Edukasi Hak</h3>
-                        <p>Menyediakan panduan langkah mitigasi hukum jika dokumen Anda terlanjur ditahan.</p>
-                    </article>
-                </div>
-            </div>
-        </section>
+<section class="hero">
+<div class="container hero-inner">
+<div class="hero-copy">
+<p class="eyebrow">Proteksi digital untuk freelancer & UMKM</p>
+<h1>Kenali Penipuan Kerja dan Kontrak Sebelum Anda Rugi</h1>
+<p class="lead">
+KontrakAman Hyperlocal membantu pekerja lepas, pekerja informal, dan pelaku UMKM mendeteksi
+lowongan kerja fiktif, penawaran kontrak mencurigakan, dan modus penipuan digital lainnya —
+dicocokkan dengan pola resmi dari OJK, Kemkomdigi, dan Kemnaker.
+</p>
+</div>
+<div class="hero-media">
+<img src="https://images.unsplash.com/photo-1522252234503-e356532cafd5?auto=format&fit=crop&w=1200&q=60" alt="Ilustrasi freelancer bekerja aman dari penipuan digital" loading="lazy" />
+</div>
+</div>
 
-        <!-- TABEL ALUR KERJA SISTEM (Bobot Fungsi Desain Ekosistem) -->
-        <section id="workflow" class="section">
-            <div class="container">
-                <h2 class="section-title">Alur Kerja Validasi</h2>
-                <p class="section-subtitle">Proses pemindaian data anonim dilakukan secara instan:</p>
-                <div class="table-wrap">
-                    <table class="schedule-table">
-                        <thead>
-                            <tr>
-                                <th>Langkah</th>
-                                <th>Aktivitas Pengguna</th>
-                                <th>Respon Mesin AI</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>01</td>
-                                <td>Tempel teks penawaran atau kontrak di kotak deteksi</td>
-                                <td>Sistem membaca data secara anonim</td>
-                            </tr>
-                            <tr>
-                                <td>02</td>
-                                <td>Klik tombol Analisis Risiko</td>
-                                <td>Pencocokan database lokal & evaluasi AI</td>
-                            </tr>
-                            <tr>
-                                <td>03</td>
-                                <td>Menerima skor lampu indikator</td>
-                                <td>Panduan mitigasi profesional diterbitkan</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
+<div class="container">
+<div class="scan-card" id="cek">
+<h2>Cek Teks Mencurigakan Secara Anonim</h2>
+<p class="scan-note">Tempel isi chat, penawaran kerja, atau isi kontrak yang meragukan. Tidak perlu login, tidak ada data pribadi yang disimpan.</p>
+<form id="scanForm" novalidate>
+<label for="scanInput" class="sr-only">Tempel teks yang mencurigakan</label>
+<textarea id="scanInput" name="scanInput" rows="5" placeholder="Contoh: 'Kerja part-time, cukup deposit 150rb dulu, langsung cuan hari ini...'"></textarea>
+<p class="field-hint" id="scanHint"></p>
+<button type="submit" class="btn btn-primary btn-block">Analisis Sekarang</button>
+</form>
 
-        <!-- KOTAK SCANNER AI & TOMBOL RESET -->
-        <section id="scanner" class="section section-alt">
-            <div class="container">
-                <h2 class="section-title">Kotak Deteksi Anonim</h2>
-                <p class="section-subtitle">Sistem aman, tanpa login. Tempel teks lowongan atau chat mencurigakan di bawah ini:</p>
-                
-                <div class="signup-form">
-                    <div class="field field-full">
-                        <textarea id="message" rows="5" placeholder="Contoh: Lowongan kerja admin, jaminan ijazah asli ditahan perusahaan..."></textarea>
-                    </div>
-                    <div class="form-actions" style="display: flex; gap: 10px; justify-content: flex-end;">
-                        <!-- Penambahan Fitur Tombol Reset -->
-                        <button class="btn btn-ghost" id="btn-reset" type="button">Reset Kotak</button>
-                        <button class="btn btn-primary" id="btn-analisis" type="button">Analisis Risiko AI</button>
-                    </div>
-                </div>
+<div class="scan-result" id="scanResult" hidden>
+<span class="badge" id="resultBadge">Waspada</span>
+<h3 id="resultTitle">Pola belum teridentifikasi spesifik</h3>
+<p id="resultDesc"></p>
+<div class="result-steps">
+<p class="result-steps-label">Langkah yang disarankan:</p>
+<p id="resultMitigasi"></p>
+</div>
+<p class="result-source" id="resultSource"></p>
+</div>
+</div>
+</div>
 
-                <div id="hasil-analisis" class="hasil-box" style="display:none; margin-top: 25px;">
-                    <h3>Hasil Pemindaian AI:</h3>
-                    <div id="konten-hasil"></div>
-                    
-                    <div class="feedback-section" style="margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--border);">
-                        <p class="small-note">Apakah hasil analisis AI lokal ini membantu Anda?</p>
-                        <button class="btn btn-ghost" id="fb-ya">👍 Akurat</button>
-                        <button class="btn btn-ghost" id="fb-tidak">👎 Kurang Tepat</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+<div class="container">
+<div class="stats-bar" id="statsBar">
+<div class="stat">
+<span class="stat-number" data-target="7">0</span>
+<span class="stat-label">Pola modus penipuan kerja terverifikasi</span>
+</div>
+<div class="stat">
+<span class="stat-number" data-target="300">0</span>
+<span class="stat-label">Laporan loker fiktif ditindaklanjuti Kemkomdigi (2025)</span>
+</div>
+<div class="stat">
+<span class="stat-number" data-target="69">0</span>
+<span class="stat-label">Tawaran ilegal diblokir OJK (2025)</span>
+</div>
+</div>
+</div>
+</section>
 
-    <footer class="site-footer">
-        <div class="container footer-inner">
-            <p>© 2026 KontrakAman.ai | Gerakan Sosial Perlindungan Pekerja Lokal.</p>
-        </div>
-    </footer>
+<section id="fitur" class="section">
+<div class="container">
+<h2 class="section-title">Fitur Utama</h2>
+<p class="section-subtitle">Dirancang khusus untuk kebutuhan pekerja lepas dan UMKM mendeteksi penipuan kontrak kerja secara mandiri.</p>
+<div class="cards">
+<article class="card">
+<h3>Deteksi Pola Chat Penipuan</h3>
+<p>Mencocokkan isi percakapan dengan basis data modus penipuan kerja dan lowongan fiktif yang sudah terverifikasi sumber resminya.</p>
+</article>
+<article class="card">
+<h3>Audit Kontrak & Penawaran Kerja</h3>
+<p>Menyorot kalimat-kalimat berisiko pada draf kontrak, invoice, atau penawaran usaha sebelum Anda menyetujuinya.</p>
+</article>
+<article class="card">
+<h3>Edukasi Anti Penipuan Digital</h3>
+<p>Penjelasan sederhana istilah hukum dan tips transaksi aman untuk freelancer, pekerja informal, dan pemilik UMKM.</p>
+</article>
+</div>
+</div>
+</section>
 
-    <script src="main.js"></script>
+<section id="cara-kerja" class="section section-alt">
+<div class="container">
+<h2 class="section-title">Cara Kerja</h2>
+<p class="section-subtitle">Tiga langkah singkat, hasil analisis langsung terlihat di layar.</p>
+<ol class="timeline">
+<li>
+<span class="timeline-step">1</span>
+<div>
+<h3>Tempel teks yang dicurigai</h3>
+<p>Salin isi chat, penawaran kerja, atau kutipan kontrak ke kolom analisis — tanpa perlu mengisi data pribadi.</p>
+</div>
+</li>
+<li>
+<span class="timeline-step">2</span>
+<div>
+<h3>Sistem mencocokkan pola modus</h3>
+<p>Teks dibandingkan dengan basis data pola kalimat penipuan kerja yang bersumber dari OJK, Kemkomdigi, dan Kemnaker.</p>
+</div>
+</li>
+<li>
+<span class="timeline-step">3</span>
+<div>
+<h3>Badge risiko & langkah mitigasi muncul</h3>
+<p>Hasil ditampilkan sebagai badge Aman/Waspada/Bahaya lengkap dengan saran langkah yang bisa langsung dilakukan.</p>
+</div>
+</li>
+</ol>
+</div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+<div class="container">
+<p class="disclaimer">
+KontrakAman Hyperlocal adalah alat bantu edukasi komunitas, dibangun dari data pola penipuan
+yang bersumber resmi (OJK, Kemkomdigi, Kemnaker). Hasil analisis bersifat simulasi pencocokan
+pola, bukan pengganti nasihat hukum profesional — namun setiap saran mitigasi yang diberikan
+mengacu langsung pada kanal pelaporan resmi pemerintah, sehingga tetap aman dan dapat dipercaya
+untuk langkah awal Anda.
+</p>
+<div class="footer-inner">
+<p>© 2026 KontrakAman Hyperlocal. Proyek sosial untuk perlindungan pekerja lepas dan UMKM.</p>
+</div>
+</div>
+</footer>
+
+<script src="main.js"></script>
 </body>
-</html>
+    </html>
