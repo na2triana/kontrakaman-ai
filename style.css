@@ -159,3 +159,77 @@ body {
   .nav-links.open { display: flex; }
   .nav-links a { padding: 10px 12px; }
        }
+
+/* 🎨 Desain Komponen Chatbot */
+.chat-box {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 320px;
+    height: 400px;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.chat-header {
+    background-color: #1e3a8a; /* Warna biru gelap formal */
+    color: #ffffff;
+    padding: 12px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.chat-header h3 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.chat-messages-area {
+    flex: 1;
+    padding: 12px;
+    overflow-y: auto;
+    background-color: #f8fafc;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.chat-input-group {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #e2e8f0;
+    background-color: #ffffff;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+#chat-input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    outline: none;
+    font-size: 13px;
+}
+
+#btn-send-chat {
+    background-color: #2563eb;
+    color: #ffffff;
+    border: none;
+    padding: 8px 14px;
+    margin-left: 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+#btn-send-chat:hover {
+    background-color: #1d4ed8;
+              }
