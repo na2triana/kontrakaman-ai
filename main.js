@@ -227,3 +227,37 @@
     initStatsCounter();
   });
 })();
+
+// 🤖 Fungsi untuk memanggil API Gemini 1.5 Flash
+async function panggilGeminiAI(teksPengguna) {
+    const API_KEY = "AQ.Ab8RN6Jl8nLcNxyFBLDrrTKUbQ9X4YRNLsCrI_YkfsSVtK697A"; // Ganti dengan API Key milikmu
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+
+    const promptSistem = `Anda adalah AI Pakar Deteksi Penipuan Kerja untuk KontrakAman.ai. 
+    Analisislah teks berikut: "${teksPengguna}".
+    Berikan format respons:
+    1. BADGE: (Bahaya/Waspada/Aman)
+    2. Penjelasan Singkat
+    3. Link Resmi Pengaduan (OJK: sipasti.ojk.go.id / Kemkomdigi: aduankonten.id) jika terindikasi penipuan.`;
+
+    try {
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                contents: [{
+                    parts: [{ text: promptSistem }]
+                }]
+            })
+        });
+
+        const data = await response.json();
+        // Mengambil teks jawaban dari struktur JSON Gemini
+        return data.candidates[0].content.parts[0].text;
+    } catch (error) {
+        console.error("Error API Gemini:", error);
+        return "Maaf, gagal memproses analisis AI saat ini.";
+    }
+}
