@@ -194,7 +194,7 @@ body {
     flex: 1;
     padding: 12px;
     overflow-y: auto;
-    background-color: #f8fafc;
+    background-color: #141920;
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -204,7 +204,7 @@ body {
     display: flex;
     padding: 10px;
     border-top: 1px solid #e2e8f0;
-    background-color: #ffffff;
+    background-color: #141920;
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
 }
@@ -231,5 +231,5 @@ body {
 }
 
 #btn-send-chat:hover {
-    background-color: #1d4ed8;
+    background-color: #141920;
               }
