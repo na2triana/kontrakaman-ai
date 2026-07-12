@@ -249,23 +249,6 @@ async function panggilGeminiAI(teksPengguna) {
     }
 }
 
-
-    const promptSistem = `Anda adalah Asisten KontrakAman.ai, seorang pakar edukasi hukum kontrak dan pencegahan penipuan kerja yang sangat ramah dan suportif.
-    
-    Aturan Menjawab:
-    1. BADGE: (Bahaya/Waspada/Aman)
-    2. Penjelasan Singkat
-    3. Link Resmi Pengaduan (OJK: sipasti.ojk.go.id / Kemkomdigi: aduankonten.id) jika terindikasi penipuan.
-    4. Jawablah dengan cerdas, valid, dan edukatif jika pengguna bertanya tentang keamanan kontrak, ciri lowongan kerja palsu, tips freelance/UMKM, atau panduan mitigasi korban penipuan.
-    5. Jika pengguna mengajukan pertanyaan di luar topik penipuan kerja, hukum kontrak, lowongan fiktif, atau pelaporan resmi pemerintah, Anda WAJIB menolak secara halus. 
-    6. Contoh penolakan: Ucapkan maaf dengan ramah, jelaskan batasan keahlian Anda, lalu mintalah pengguna untuk kembali mengajukan pertanyaan seputar keamanan kontrak kerja.
-
-    Pertanyaan pengguna: "${teksPengguna}"`;
-
-
-        
-
-
 // 🕹️ Logika Sensor Klik untuk Tombol Opsi Cepat (Suggestion Chips)
 document.querySelectorAll('.chip-btn').forEach(button => {
     button.addEventListener('click', () => {
@@ -279,52 +262,50 @@ document.querySelectorAll('.chip-btn').forEach(button => {
 // ==========================================
 // 🕹️ LOGIKA INTERAKSI CHATBOT & EFEK LOADING
 // ==========================================
-
 const chatToggleBtn = document.getElementById('chat-toggle-btn');
 const chatContainer = document.getElementById('chat-container');
 const btnSendChat = document.getElementById('btn-send-chat');
 const chatInput = document.getElementById('chat-input');
 const chatMessages = document.getElementById('chat-messages');
-
 const chatCloseBtn = document.getElementById('chat-close-btn');
 
-chatToggleBtn.addEventListener('click', () => {
-    chatContainer.classList.toggle('hidden');
-    // Berubah jadi ikon silang (🔍) jika chat tertutup
-    if (chatContainer.classList.contains('hidden')) {
-        chatToggleBtn.textContent = '🔍';
-    } 
-});
-
 // 1. Logika Buka Jendela: Sembunyikan tombol kaca pembesar
-chatToggleBtn.addEventListener('click', () => {
-    chatContainer.classList.remove('hidden');
-    chatToggleBtn.style.display = 'none'; 
-});
+if (chatToggleBtn && chatContainer) {
+    chatToggleBtn.addEventListener('click', () => {
+        chatContainer.classList.remove('hidden');
+        chatToggleBtn.style.display = 'none'; 
+    });
+}
 
 // 2. Logika Tutup Jendela: Munculkan kembali tombol kaca pembesar
-chatCloseBtn.addEventListener('click', () => {
-    chatContainer.classList.add('hidden');
-    chatToggleBtn.style.display = 'flex'; 
-});
+if (chatCloseBtn && chatToggleBtn && chatContainer) {
+    chatCloseBtn.addEventListener('click', () => {
+        chatContainer.classList.add('hidden');
+        chatToggleBtn.style.display = 'flex'; 
+    });
+}
 
 // 3. Fitur Mengirim Pesan Lewat Tombol Enter Keyboard ⌨️
-chatInput.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') {
-        event.preventDefault(); // Mencegah eror baris baru di input
-        btnSendChat.click();    // Memicu otomatis tombol kirim
-    }
-});
+if (chatInput && btnSendChat) {
+    chatInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Mencegah eror baris baru di input
+            btnSendChat.click();    // Memicu otomatis tombol kirim
+        }
+    });
+}
 
-
-// 2. Fungsi Menampilkan Gelembung Chat di Layar
+// 4. Fungsi Menampilkan Gelembung Chat di Layar
 function tampilkanGelembungChat(teks, pengirim) {
+    if (!chatMessages) return;
     const bubble = document.createElement('div');
     bubble.style.padding = '8px 12px';
     bubble.style.borderRadius = '8px';
     bubble.style.maxWidth = '85%';
     bubble.style.fontSize = '13px';
     bubble.style.lineHeight = '1.4';
+    bubble.style.marginBottom = '8px';
+    bubble.style.display = 'inline-block';
     
     if (pengirim === 'user') {
         bubble.style.backgroundColor = '#e2e8f0';
@@ -341,32 +322,35 @@ function tampilkanGelembungChat(teks, pengirim) {
     chatMessages.scrollTop = chatMessages.scrollHeight; // Auto-scroll ke bawah
 }
 
-// 3. Logika Utama Saat Tombol Kirim Diklik
-btnSendChat.addEventListener('click', async () => {
-    const teksUser = chatInput.value.trim();
-    if (!teksUser) return;
+// 5. Logika Utama Saat Tombol Kirim Diklik
+if (btnSendChat && chatInput) {
+    btnSendChat.addEventListener('click', async () => {
+        const teksUser = chatInput.value.trim();
+        if (!teksUser) return;
 
-    tampilkanGelembungChat(teksUser, 'user');
-    chatInput.value = '';
+        tampilkanGelembungChat(teksUser, 'user');
+        chatInput.value = '';
 
-    const loadingId = 'loading-' + Date.now();
-    const loadingBubble = document.createElement('div');
-    loadingBubble.id = loadingId;
-    loadingBubble.className = 'message-loading';
-    loadingBubble.textContent = 'Asisten sedang menganalisis... ⏳';
-    chatMessages.appendChild(loadingBubble);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
+        const loadingId = 'loading-' + Date.now();
+        const loadingBubble = document.createElement('div');
+        loadingBubble.id = loadingId;
+        loadingBubble.style.alignSelf = 'flex-start';
+        loadingBubble.style.fontSize = '12px';
+        loadingBubble.style.color = '#64748b';
+        loadingBubble.textContent = 'Asisten sedang menganalisis... ⏳';
+        chatMessages.appendChild(loadingBubble);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
 
-    try {
-        // 🔄 Menjalankan fungsi AI secara aman
-        const responsAI = await panggilGeminiAI(teksUser);
-        tampilkanGelembungChat(responsAI, 'ai');
-    } catch (error) {
-        // ⚠️ Menangkap jika ada eror sistem tersembunyi
-        tampilkanGelembungChat("Sistem Chat Eror: " + error.message, 'ai');
-    } finally {
-        // 🧼 Blok ini AKAN SELALU JALAN untuk menghapus loading, apa pun yang terjadi
-        const currentLoading = document.getElementById(loadingId);
-        if (currentLoading) currentLoading.remove();
-    }
-});
+        try {
+            // 🔄 Menjalankan fungsi AI secara aman lewat serverless Netlify
+            const responsAI = await panggilGeminiAI(teksUser);
+            tampilkanGelembungChat(responsAI, 'ai');
+        } catch (error) {
+            tampilkanGelembungChat("Sistem Chat Eror: " + error.message, 'ai');
+        } finally {
+            // 🧼 Menghapus efek loading setelah respons selesai
+            const currentLoading = document.getElementById(loadingId);
+            if (currentLoading) currentLoading.remove();
+        }
+    });
+                                              }
