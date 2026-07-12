@@ -272,14 +272,16 @@ const chatCloseBtn = document.getElementById('chat-close-btn');
 const chatWrapper = document.querySelector('.chat-toggle-wrapper');
 
 // 1. Logika Buka Jendela
+if (chatToggleBtn && chatWrapper) {
 chatToggleBtn.addEventListener('click', () => {
-    chatContainer.classList.remove('hidden');
+    chatWrapper.classList.remove('hidden');
     chatToggleBtn.style.display = 'none'; // Baris ini 🔍
 });
 
 // 2. Logika Tutup Jendela
+if (chatCloseBtn && chatToggleBtn && chatWrapper)
 chatCloseBtn.addEventListener('click', () => {
-    chatContainer.classList.add('hidden');
+    chatWrapper.classList.add('hidden');
     chatToggleBtn.style.display = 'flex'; // Dan baris ini 🔍
 });
 
