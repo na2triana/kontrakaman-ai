@@ -269,21 +269,26 @@ const chatInput = document.getElementById('chat-input');
 const chatMessages = document.getElementById('chat-messages');
 const chatCloseBtn = document.getElementById('chat-close-btn');
 
-const chatWrapper = document.querySelector('.chat-toggle-wrapper');
 
 // 1. Logika Buka Jendela
-if (chatToggleBtn && chatWrapper) {
-chatToggleBtn.addEventListener('click', () => {
-    chatWrapper.classList.remove('hidden');
-    chatToggleBtn.style.display = 'none'; // Baris ini 🔍
-});
+// Tambahkan ini di bagian atas pengenalan variabel chat
+const chatWrapper = document.querySelector('.chat-toggle-wrapper');
 
-// 2. Logika Tutup Jendela
-if (chatCloseBtn && chatToggleBtn && chatWrapper)
-chatCloseBtn.addEventListener('click', () => {
-    chatWrapper.classList.add('hidden');
-    chatToggleBtn.style.display = 'flex'; // Dan baris ini 🔍
-});
+// 1. Logika Buka Jendela: Sembunyikan seluruh wrapper stempel
+if (chatToggleBtn && chatContainer && chatWrapper) {
+    chatToggleBtn.addEventListener('click', () => {
+        chatContainer.classList.remove('hidden');
+        chatWrapper.style.display = 'none'; 
+    });
+}
+
+// 2. Logika Tutup Jendela: Munculkan kembali seluruh wrapper stempel
+if (chatCloseBtn && chatContainer && chatWrapper) {
+    chatCloseBtn.addEventListener('click', () => {
+        chatContainer.classList.add('hidden');
+        chatWrapper.style.display = 'flex'; 
+    });
+            }
 
 // 1. Logika Buka Jendela: Sembunyikan tombol kaca pembesar
 if (chatToggleBtn && chatContainer) {
