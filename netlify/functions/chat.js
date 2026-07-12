@@ -14,7 +14,7 @@ exports.handler = async function (event, context) {
 
         // 🔒 Membaca API Key secara rahasia dari Environment Variable Netlify
         const API_KEY = process.env.GEMINI_API_KEY;
-        const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${API_KEY}`;
 
         // 🧠 Kita pindahkan instruksi sistem ke sini agar tidak bisa diintip dari browser
 
