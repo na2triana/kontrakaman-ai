@@ -161,10 +161,19 @@ untuk langkah awal Anda.
 </div>
 </footer>
 
+<!-- 🔍 Tombol Melayang dengan Teks Melingkar Efek Stempel -->
+<div class="chat-toggle-wrapper">
+    <svg class="chat-stamp-svg" viewBox="0 0 100 100">
+        <path id="textCircle" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="none"/>
+        <text>
+            <textPath href="#textCircle" startOffset="0%">
+                • TANYA AI DI SINI • KONTRAKAMAN
+            </textPath>
+        </text>
+    </svg>
+    <button id="chat-toggle-btn" class="chat-toggle-btn">🔍</button>
+</div>
 
-
-  <!-- 🔍 Tombol Melayang Kaca Pembesar -->
-<button id="chat-toggle-btn" class="chat-toggle-btn">🔍</button>
 
   <!-- 💬 Area Komponen Chatbot AI -->
 <div id="chat-container" class="chat-box hidden">
