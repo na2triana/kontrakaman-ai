@@ -269,6 +269,20 @@ const chatInput = document.getElementById('chat-input');
 const chatMessages = document.getElementById('chat-messages');
 const chatCloseBtn = document.getElementById('chat-close-btn');
 
+const chatWrapper = document.querySelector('.chat-toggle-wrapper');
+
+// 1. Logika Buka Jendela
+chatToggleBtn.addEventListener('click', () => {
+    chatContainer.classList.remove('hidden');
+    chatToggleBtn.style.display = 'none'; // Baris ini 🔍
+});
+
+// 2. Logika Tutup Jendela
+chatCloseBtn.addEventListener('click', () => {
+    chatContainer.classList.add('hidden');
+    chatToggleBtn.style.display = 'flex'; // Dan baris ini 🔍
+});
+
 // 1. Logika Buka Jendela: Sembunyikan tombol kaca pembesar
 if (chatToggleBtn && chatContainer) {
     chatToggleBtn.addEventListener('click', () => {
