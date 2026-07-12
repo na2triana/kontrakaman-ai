@@ -42,7 +42,7 @@ dicocokkan dengan pola resmi dari OJK, Kemkomdigi, dan Kemnaker.
 </p>
 </div>
 <div class="hero-media">
-<img src="https://images.unsplash.com/photo-1522252234503-e356532cafd5?auto=format&fit=crop&w=1200&q=60" alt="Ilustrasi freelancer bekerja aman dari penipuan digital" loading="lazy" />
+<img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80"Ilustrasi freelancer bekerja aman dari penipuan digital" loading="lazy" />
 </div>
 </div>
 
@@ -161,17 +161,33 @@ untuk langkah awal Anda.
 </div>
 </footer>
 
-<script src="main.js"></script>
-  <div id="chat-container" class="chat-box">
+
+
+  <!-- 🔍 Tombol Melayang Kaca Pembesar -->
+<button id="chat-toggle-btn" class="chat-toggle-btn">🔍</button>
+
+  <!-- 💬 Area Komponen Chatbot AI -->
+<div id="chat-container" class="chat-box hidden">
     <div class="chat-header">
-        <h3>Asisten KontrakAman.ai</h3>
+        <h3>Asisten KontrakAman.ai <span id="chat-close-btn" style="float: right; cursor: pointer;">✖</span></h3>
     </div>
     <div id="chat-messages" class="chat-messages-area">
-        </div>
+        <!-- Chat otomatis masuk di sini -->
+    </div>
+    
+    <!-- 🔘 Tombol Opsi Cepat (Suggestion Chips) -->
+    <div class="suggestion-chips">
+        <button class="chip-btn" data-teks="Bagaimana cara melapor resmi ke OJK atau Kemkomdigi?">🏛️ Buat Laporan Resmi</button>
+        <button class="chip-btn" data-teks="Apa yang harus dilakukan jika ijazah ditahan perusahaan?">📜 Ijazah Ditahan</button>
+        <button class="chip-btn" data-teks="Tips aman sebelum menandatangani kontrak kerja freelance?">💻 Tips Freelance</button>
+    </div>
+
     <div class="chat-input-group">
-        <input type="text" id="chat-input" placeholder="Tanyakan pola modus atau isi kontrak...">
+        <input type="text" id="chat-input" placeholder="Tanyakan seputar isi kontrak...">
         <button id="btn-send-chat">Kirim</button>
     </div>
-  </div>
+</div>
+    
+  <script src="main.js"></script>
 </body>
                                         </html>

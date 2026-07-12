@@ -177,7 +177,7 @@ body {
 }
 
 .chat-header {
-    background-color: #1e3a8a; /* Warna biru gelap formal */
+    background-color: #ef9f27; /* Warna kuning primary */
     color: #ffffff;
     padding: 12px;
     border-top-left-radius: 12px;
@@ -219,7 +219,7 @@ body {
 }
 
 #btn-send-chat {
-    background-color: #2a1a02;
+    background-color: #ef9f27;
     color: #ffffff;
     border: none;
     padding: 8px 14px;
@@ -231,5 +231,81 @@ body {
 }
 
 #btn-send-chat:hover {
-    background-color: #141920;
+    background-color: #2a1a02;
               }
+
+/* 🕶️ Menyembunyikan kotak chat secara default */
+.chat-box.hidden {
+    display: none !important;
+}
+
+/* 🔍 Desain Tombol Melayang Kaca Pembesar */
+.chat-toggle-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 55px;
+    height: 55px;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease-in-out;
+}
+
+.chat-toggle-btn:hover {
+    transform: scale(1.1);
+    background-color: #1d4ed8;
+}
+
+/* ⏳ Gaya Efek Loading Teks AI */
+.message-loading {
+    align-self: flex-start;
+    background-color: #e2e8f0;
+    color: #475569;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-style: italic;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+      }
+
+/* 🔘 Desain Tombol Opsi Cepat */
+.suggestion-chips {
+    display: flex;
+    gap: 6px;
+    padding: 8px 10px;
+    background-color: #f1f5f9;
+    overflow-x: auto; /* Bisa digeser horizontal jika layar sempit */
+    border-top: 1px solid #e2e8f0;
+}
+
+.chip-btn {
+    background-color: #ffffff;
+    color: #334155;
+    border: 1px solid #cbd5e1;
+    border-radius: 16px;
+    padding: 6px 12px;
+    font-size: 11px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+}
+
+.chip-btn:hover {
+    background-color: #e2e8f0;
+    border-color: #94a3b8;
+  }
